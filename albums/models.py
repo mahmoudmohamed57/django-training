@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class Album(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, default="New Album")
     creation_datetime = models.DateTimeField(default=timezone.now)
     release_datetime = models.DateTimeField(blank=False)
