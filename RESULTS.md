@@ -38,8 +38,8 @@ album.save()
 ```
 # get the latest released album
 ```
-Album.objects.order_by('release_datetime').reverse()[0]
-<Album: Album object (2)>
+Album.objects.latest('release_datetime')
+<Album: name = album2 || creation_datetime = 2022-10-08 06:07:10.733132+00:00 || release_datetime = 2022-10-08 06:07:10.733132+00:00 || cost = 75.70>
 ```
 # get all albums released before today
 ```
@@ -63,6 +63,12 @@ for track in Artist.objects.all():
 
 <QuerySet [<Album: Album object (1)>]>
 <QuerySet [<Album: Album object (2)>]>
+
+for track in Album.objects.select_related('artist'):
+        print(track.name, "belong to Artist : ",track.artist.stage_name)
+
+album1 belong to Artist :  Mahmoud Mohamed
+album2 belong to Artist :  Ahmed Mohamed
 ```
 # list down all albums ordered by cost then by name (cost has the higher priority)
 ```
