@@ -75,3 +75,10 @@ album2 belong to Artist :  Ahmed Mohamed
 Album.objects.order_by('-cost' , 'name')
 <QuerySet [<Album: Album object (2)>, <Album: Album object (1)>]>
 ```
+# Modify the artist queryset so that I can order the list of artists by the number of their approved albums
+```
+query_set = Artist.objects.all()
+sorted(query_set, key=lambda object:object.approved_albums())
+[<Artist: stage_name = Mahmoud Mohamed || social_link_field = https://www.instagram.com/mahmoud/>, <Artist: stage_name = 
+Ahmed Mohamed || social_link_field = https://www.instagram.com/ahmed/>]
+```
