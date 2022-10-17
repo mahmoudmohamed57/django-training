@@ -11,6 +11,6 @@ class AlbumInline(admin.TabularInline):
 
 @admin.register(models.Album)
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ['artist', 'name', 'creation_datetime', 'release_datetime',
+    list_display = ['artist', 'name', 'created', 'release_datetime',
                     'cost', 'is_approved']
-    readonly_fields = ['creation_datetime']
+    readonly_fields = ['created']
