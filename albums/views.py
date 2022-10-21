@@ -1,21 +1,13 @@
-from django.shortcuts import render
-from django.views import View
-from .forms import AlbumForm
+from .models import Album
+from .serializers import AlbumSerializer
+from rest_framework.generics import ListCreateAPIView
 
 # Create your views here.
 
 
-class create(View):
-    form_class = AlbumForm
-    initial = {'key': 'value'}
-    template_name = 'createAlbum.html'
+class AlbumList(ListCreateAPIView):
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
 
-    def get(self, request):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-        return render(request, self.template_name, {'form': form})
+    def get_serializer_context(self):
+        return {'request': self.request}
