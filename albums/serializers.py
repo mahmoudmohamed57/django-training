@@ -13,3 +13,7 @@ class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
         fields = ['id', 'name',  'image', 'audio']
+
+    def create(self, validated_data):
+        album_id = self.context('album_id')
+        return Song.objects.create(album_id=album_id, **validated_data)

@@ -1,6 +1,6 @@
-from django.urls import path
+from rest_framework.routers import SimpleRouter
 from . import views
 
-urlpatterns = [
-    path("", views.ArtistList.as_view()),
-]
+router = SimpleRouter()
+router.register('artists', views.ArtistViewSet)
+urlpatterns = router.urls
