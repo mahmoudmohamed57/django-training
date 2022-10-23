@@ -1,10 +1,10 @@
 from .models import Artist
 from .serializers import ArtistSerializer
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import ListCreateAPIView
 
 # Create your views here.
 
 
-class ArtistViewSet(ModelViewSet):
+class ArtistList(ListCreateAPIView):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
