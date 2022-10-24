@@ -1,21 +1,20 @@
-from django.shortcuts import render
-from django.views import View
-from .forms import AlbumForm
+from .models import Album, Song
+from .serializers import AlbumSerializer, SongSerializer
+from rest_framework.viewsets import ModelViewSet
 
 # Create your views here.
 
 
-class create(View):
-    form_class = AlbumForm
-    initial = {'key': 'value'}
-    template_name = 'createAlbum.html'
+class AlbumViewSet(ModelViewSet):
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
 
-    def get(self, request):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
 
-    def post(self, request):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-        return render(request, self.template_name, {'form': form})
+class SongViewSet(ModelViewSet):
+    serializer_class = SongSerializer
+
+    def get_queryset(self):
+        return Song.objects.filter(album_id=self.kwargs['album_pk'])
+
+    def get_serializer_context(self):
+        return {'album_id': self.kwargs['album_pk']}
