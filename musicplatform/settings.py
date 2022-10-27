@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'artists.apps.ArtistsConfig',
     'albums.apps.AlbumsConfig',
+    'users.apps.UsersConfig',
+    'authentication.apps.AuthenticationConfig',
+    'knox',
     'imagekit',
 ]
 
@@ -80,8 +83,11 @@ WSGI_APPLICATION = 'musicplatform.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'musicplatform',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': '01018183493',
     }
 }
 
@@ -128,3 +134,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
