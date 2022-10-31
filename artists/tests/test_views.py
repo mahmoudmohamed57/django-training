@@ -10,7 +10,7 @@ class TestCreateArtist:
         response = auth_client.get('/artists/')
         assert response.status_code == status.HTTP_200_OK
 
-    def test_if_artist_not_found_return_404(self, auth_client):
+    def test_if_artist_is_found_return_200(self, auth_client):
         artist = baker.make(Artist)
         response = auth_client.get(f'/artists/{artist.id}/')
-        assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert response.status_code == status.HTTP_200_OK
