@@ -23,8 +23,8 @@ admin.site.index_title = 'Admin'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('artists/', include('artists.urls')),
-    path('', include('albums.urls')),
     path('users/', include('users.urls')),
-    path('authentication/', include('authentication.urls'))
+    path('authentication/', include('authentication.urls')),
+    path('', include('artists.urls')),
+    path('', include('albums.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

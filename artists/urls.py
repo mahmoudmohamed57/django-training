@@ -1,6 +1,8 @@
-from django.urls import path
+from rest_framework_nested import routers
 from . import views
 
-urlpatterns = [
-    path("", views.ArtistList.as_view()),
-]
+
+router = routers.SimpleRouter()
+router.register('artists', views.ArtistList)
+
+urlpatterns = router.urls

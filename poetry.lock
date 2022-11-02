@@ -186,6 +186,17 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "model-bakery"
+version = "1.9.0"
+description = "Smart object creation facility for Django."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = ">=3.2"
+
+[[package]]
 name = "mysqlclient"
 version = "2.1.1"
 description = "Python interface to MySQL"
@@ -321,7 +332,7 @@ python-versions = ">=2"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "09753bd85a94c1b2332ac1ad7d4e128ead47efd73e5b1635d0154456ad0dbeeb"
+content-hash = "6f6fc16653facbcc33eba63c5e4b7022d3fd6ddedb0c2dca7f2a221238d4fb80"
 
 [metadata.files]
 asgiref = [
@@ -469,6 +480,10 @@ exceptiongroup = [
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
+]
+model-bakery = [
+    {file = "model_bakery-1.9.0-py2.py3-none-any.whl", hash = "sha256:93ac818df49377d4f14316105028fa95231474bf268d6017e420e5d4b74d54fd"},
+    {file = "model_bakery-1.9.0.tar.gz", hash = "sha256:99571801a26b85b8dcba7f0ad39750aeb2f2477fe770d2291823e16788785000"},
 ]
 mysqlclient = [
     {file = "mysqlclient-2.1.1-cp310-cp310-win_amd64.whl", hash = "sha256:c1ed71bd6244993b526113cca3df66428609f90e4652f37eb51c33496d478b37"},
