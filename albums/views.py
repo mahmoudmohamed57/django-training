@@ -3,6 +3,7 @@ from .models import Album, Song
 from .serializers import AlbumSerializer, SongSerializer
 from .filters import AlbumFilter
 from .pagination import AlbumPagination
+from .permissions import IsArtistPermission
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -12,7 +13,7 @@ from rest_framework.generics import ListAPIView
 
 
 class AlbumViewSet(ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsArtistPermission]
     queryset = Album.approved_album.all()
     serializer_class = AlbumSerializer
     filter_backends = [DjangoFilterBackend]
@@ -21,7 +22,7 @@ class AlbumViewSet(ModelViewSet):
 
 
 class ManualAlbumList(ListAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsArtistPermission]
     serializer_class = AlbumSerializer
     pagination_class = AlbumPagination
 
