@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from knox.auth import TokenAuthentication
 from .models import User
-from .permission import UserPermission
+from .permissions import UserPermission
 from .serializers import UserSerializer
 
 

@@ -9,6 +9,10 @@ from imagekit.processors import ResizeToFill
 
 # Create your models here.
 
+class ApprovedAlbumManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_approved=True)
+
 
 class Album(TimeStampedModel):
     artist = models.ForeignKey(Artist, null=False, on_delete=models.CASCADE)
@@ -17,6 +21,8 @@ class Album(TimeStampedModel):
     cost = models.DecimalField(max_digits=10, decimal_places=2)
     is_approved = models.BooleanField(
         default=True, help_text='Approve the album if its name is not explicit')
+    objects = models.Manager()
+    approved_album = ApprovedAlbumManager()
 
     def __str__(self):
         return (f"name = {self.name} || creation_datetime = {self.created} || release_datetime = {self.release_datetime} || cost = {self.cost}")
