@@ -8,11 +8,6 @@ from users.models import User
 
 
 @pytest.fixture
-def album():
-    return baker.make(Album)
-
-
-@pytest.fixture
 def artist():
     return baker.make(Artist)
 
@@ -20,6 +15,11 @@ def artist():
 @pytest.fixture
 def user():
     return baker.make(User)
+
+
+@pytest.fixture
+def album():
+    return baker.make(Album)
 
 
 @pytest.fixture

@@ -11,11 +11,6 @@ class AlbumSerializer(serializers.ModelSerializer):
         fields = ['id', 'artist', 'name', 'release_datetime', 'cost']
         artist = ArtistSerializer(read_only=True)
 
-        def create(self, validated_data):
-            validated_data['artist'] = Artist.objects.get(
-                user=self.context['request'].user)
-            return super(AlbumSerializer, self).create(validated_data)
-
 
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
