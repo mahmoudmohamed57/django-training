@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'knox',
     'imagekit',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -84,11 +86,8 @@ WSGI_APPLICATION = 'musicplatform.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'musicplatform',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '01018183493',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -141,4 +140,14 @@ AUTH_USER_MODEL = 'users.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
     'COERCE_DECIMAL_TO_STRING': False,
+}
+
+
+
+CELERY_CONF_BROKER_URL = "redis://127.0.0.1:6379/1"
+CELERY_CONF_BEAT_SCHEDULE = {
+    'send_artist_a_reminder_email': {
+        'task': 'albums.tasks.send_artist_a_reminder_email',
+        'schedule': crontab(minute=0, hour='*/24')
+    },
 }
