@@ -5,6 +5,7 @@ from artists.models import Artist
 from model_utils.models import TimeStampedModel
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from .tasks import send_artist_a_congratulation_email
 
 
 # Create your models here.
@@ -23,6 +24,10 @@ class Album(TimeStampedModel):
         default=True, help_text='Approve the album if its name is not explicit')
     objects = models.Manager()
     approved_album = ApprovedAlbumManager()
+
+    def save(self, *args, **kwargs):
+        send_artist_a_congratulation_email.delay(self.artist.user.id, self.name, self.release_datetime, self.cost)
+        super(Album, self).save(*args, **kwargs)
 
     def __str__(self):
         return (f"name = {self.name} || creation_datetime = {self.created} || release_datetime = {self.release_datetime} || cost = {self.cost}")
